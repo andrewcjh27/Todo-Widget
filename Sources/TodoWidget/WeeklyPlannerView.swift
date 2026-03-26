@@ -7,12 +7,13 @@ struct WeeklyPlannerView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Picker("List", selection: $selectedBucket) {
+            Picker("", selection: $selectedBucket) {
                 ForEach(WeekBucket.allCases) { bucket in
                     Text(bucket.title).tag(bucket)
                 }
             }
             .pickerStyle(.segmented)
+            .labelsHidden()
             
             HStack(spacing: 8) {
                 TextField("Add a task...", text: $draftText)

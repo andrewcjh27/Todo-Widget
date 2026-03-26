@@ -20,12 +20,13 @@ struct TodoListView: View {
             if showPlanner {
                 WeeklyPlannerView()
             } else {
-                Picker("List", selection: $selectedBucket) {
+                Picker("", selection: $selectedBucket) {
                     ForEach(TodoBucket.allCases) { bucket in
                         Text(bucket.title).tag(bucket)
                     }
                 }
                 .pickerStyle(.segmented)
+                .labelsHidden()
                 
                 HStack(spacing: 8) {
                     TextField("Add a task...", text: $draftText)
