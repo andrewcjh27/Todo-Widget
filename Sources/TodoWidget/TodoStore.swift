@@ -48,7 +48,22 @@ final class TodoStore: ObservableObject {
     private let decoder = JSONDecoder()
     
     init() {
+        migrateDefaultsFromUnbundledBuild()
         load()
+    }
+
+    /// `swift run` stores data under the executable's name, but the packaged
+    /// app stores it under its bundle ID. Copy old tasks across on first launch.
+    private func migrateDefaultsFromUnbundledBuild() {
+        let keys = [storageKey, weekStorageKey]
+        guard keys.allSatisfy({ defaults.data(forKey: $0) == nil }),
+              let legacyDefaults = UserDefaults(suiteName: "TodoWidget") else { return }
+
+        for key in keys {
+            if let data = legacyDefaults.data(forKey: key) {
+                defaults.set(data, forKey: key)
+            }
+        }
     }
     
     func items(for bucket: TodoBucket) -> [TodoItem] {

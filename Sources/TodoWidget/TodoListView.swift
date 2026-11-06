@@ -65,6 +65,10 @@ struct TodoListView: View {
                     .frame(maxHeight: 260)
                 }
             }
+
+            Divider()
+
+            LaunchAtLoginToggle()
         }
         .padding(14)
         .frame(width: 340)
