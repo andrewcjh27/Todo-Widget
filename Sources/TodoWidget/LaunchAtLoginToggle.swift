@@ -9,7 +9,7 @@ struct LaunchAtLoginToggle: View {
         VStack(alignment: .leading, spacing: 4) {
             Toggle(
                 "Launch at login",
-                isOn: Binding(get: { isEnabled }, set: setEnabled)
+                isOn: Binding(get: { isEnabled }, set: { setEnabled($0) })
             )
             .toggleStyle(.checkbox)
             .font(.caption)
