@@ -2,6 +2,8 @@
 
 A macOS menu bar todo app built with SwiftUI. Keeps daily, weekly, and monthly task lists accessible from the top menu bar, with local persistence via UserDefaults.
 
+[Download page](https://andrewcjh27.github.io/Todo-Widget/)
+
 ## Features
 
 - **Menu bar app** — lives in the macOS menu bar for quick access
