@@ -8,6 +8,8 @@
     <string>Todo Widget</string>
     <key>CFBundleExecutable</key>
     <string>TodoWidget</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
     <string>io.github.andrewcjh27.TodoWidget</string>
     <key>CFBundleInfoDictionaryVersion</key>
