@@ -1,0 +1,38 @@
+name: Build
+
+# Pull requests: build and keep the zip as a downloadable workflow artifact.
+# Tags like v1.0.0: also publish a GitHub Release with the zip attached.
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build app
+        run: |
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            scripts/build-app.sh "$GITHUB_REF_NAME"
+          else
+            scripts/build-app.sh
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TodoWidget
+          path: dist/TodoWidget.zip
+
+      - name: Publish release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/TodoWidget.zip --title "$GITHUB_REF_NAME" --generate-notes
